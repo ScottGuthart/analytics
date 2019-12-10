@@ -8,7 +8,7 @@ import pandas as pd
 import numpy as np
 from tempfile import mkstemp
 from zipfile import ZipFile
-from flask_login import login_required
+from flask_login import login_required, current_user
 from app.auth.confirm import check_confirmed
 
 @bp.route('/', methods=['GET','POST'])
@@ -53,7 +53,9 @@ def save_excel(data, name):
         os.mkdir(current_app.instance_path)
     if not os.path.exists(os.path.join(current_app.instance_path, 'files')):
         os.mkdir(os.path.join(current_app.instance_path, 'files'))
-    filename = os.path.join(current_app.instance_path, 'files', f'{name}.xlsx')
+    if not os.path.exists(os.path.join(current_app.instance_path, 'files', current_user.username)):
+        os.mkdir(os.path.join(current_app.instance_path, 'files', current_user.username))
+    filename = os.path.join(current_app.instance_path, 'files', current_user.username, f'{name}.xlsx')
     data.save(filename)
     return filename
 
