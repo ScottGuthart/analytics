@@ -8,10 +8,13 @@ import pandas as pd
 import numpy as np
 from tempfile import mkstemp
 from zipfile import ZipFile
-
+from flask_login import login_required
+from app.auth.confirm import check_confirmed
 
 @bp.route('/', methods=['GET','POST'])
 @bp.route('/index', methods=['GET','POST'])
+@login_required
+@check_confirmed
 def index():
     form = FileForm()
     if form.validate_on_submit():
