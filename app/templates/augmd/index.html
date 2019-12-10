@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+    <h1>Generate Pairs</h1>
+    <div class="row">
+        <div class="col-md-4">
+            {{ wtf.quick_form(form) }}
+        </div>
+    </div>
+    <br><br>
+    <div class="alert alert-success">
+        <h2 id="file-labeling-instructions">File labeling instructions</h2>
+        <p><i>Note: It's okay if your ranking and MaxDiff data are in the same file.</i></p>
+        <h3 id="maxdiff-design">MaxDiff Design</h2>
+        <p>Make sure the first sheet of the excel file contains the design</p>
+        <h3 id="maxdiff-file">MaxDiff File</h3>
+        <p>Best ranks must start with:<code>*MDBEST</code></p>
+        <p>Worst ranks must start with: <code>*MDWORST</code></p>
+        <p>Responseid: <code>responseid</code></p>
+        <p>Respid: <code>respid</code></p>
+        <p>MaxDiff Version: <code>&#39;hVersion&#39;</code></p>
+        <h3 id="ranking-file">Ranking File</h3>
+        <p>Best ranks: <code>*RANKBEST_[item#]</code></p>
+        <p>Worst ranks: <code>*RANKWORST_[item#]</code></p>
+        <p>Respid: <code>respid</code></p>
+        <h3 id="win-loss-rates-file">Win Loss Rates File</h3>
+        <p>All you need for this file is a column with the header <code>Wins</code> where the first row is the number of times you&#39;d like the best of the best item to win and the last row with the number of times you&#39;d like the worst of the best items to win.</p>
+        <p><strong>Note:</strong> When generating pairs for the worst items, the script reverses the order </p>
+    </div>
+{% endblock %}

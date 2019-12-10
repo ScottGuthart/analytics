@@ -1,7 +1,7 @@
 {% extends 'bootstrap/base.html' %}
 
 {% block title %}
-    {% if title %}{{ title }} - Flask App{% else %} Welcome to Flaskapp{% endif %}
+    {% if title %}{{ title }} - Analytics Hub{% else %} Welcome to the Analytics Hub{% endif %}
 {% endblock %}
 
 {% block navbar %}
@@ -14,11 +14,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url_for('main.index') }}">Flaskapp</a>
+                <a class="navbar-brand" href="{{ url_for('main.index') }}">Analytics Hub</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url_for('main.index') }}">Home</a></li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url_for('augmd.index') }}">Augmented MaxDiff</a></li>
                 </ul>
             </div>
         </div>

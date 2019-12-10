@@ -19,6 +19,9 @@ def create_app(config_class=Config):
     from app.errors import bp as errors_bp
     app.register_blueprint(errors_bp)
 
+    from app.augmd import bp as augmd_bp
+    app.register_blueprint(augmd_bp, url_prefix='/augmd')
+
     if not app.debug and not app.testing:
         if app.config['MAIL_SERVER']:
             auth = None
