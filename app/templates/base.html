@@ -1,5 +1,10 @@
 {% extends 'bootstrap/base.html' %}
 
+{% block head %}
+{{super()}}
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+{% endblock %}
+
 {% block title %}
     {% if title %}{{ title }} - Analytics Hub{% else %} Welcome to the Analytics Hub{% endif %}
 {% endblock %}
