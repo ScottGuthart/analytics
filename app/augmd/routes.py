@@ -46,6 +46,10 @@ def index():
 
 
 def save_excel(data, name):
+    if not os.path.exists(current_app.instance_path):
+        os.mkdir(current_app.instance_path)
+    if not os.path.exists(os.path.join(current_app.instance_path, 'files')):
+        os.mkdir(os.path.join(current_app.instance_path, 'files'))
     filename = os.path.join(current_app.instance_path, 'files', f'{name}.xlsx')
     data.save(filename)
     return filename
