@@ -1,1 +1,1 @@
-web: gunicorn gsheets:app
+web: gunicorn flaskapp:app
