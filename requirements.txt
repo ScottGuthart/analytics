@@ -38,5 +38,4 @@ wrapt==1.11.2
 WTForms==2.2.1
 xlrd==1.2.0
 psycopg2
-python-dotenv
 gunicorn
