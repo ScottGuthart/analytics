@@ -29,10 +29,10 @@ def prep(md, rank):
     rank_data = {}
     for i in range(0, len(rank)):
         best_ranks = rank[b_ranks].loc[i][(~rank[b_ranks].loc[i].isna())].sort_values()
-        best_list = [int(item.split('_')[1]) for item in best_ranks.index]
+        best_list = [int(''.join(filter(str.isdigit, item.split('*RANKBEST')[1]))) for item in best_ranks.index]
 
         worst_ranks = rank[w_ranks].loc[i][(~rank[w_ranks].loc[i].isna())].sort_values()
-        worst_list = [int(item.split('_')[1]) for item in worst_ranks.index]
+        worst_list = [int(''.join(filter(str.isdigit, item.split('*RANKWORST')[1]))) for item in worst_ranks.index]
 
         rank_data[ rank.loc[i]['respid'] ] = best_list + worst_list
 
