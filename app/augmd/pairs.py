@@ -63,7 +63,8 @@ def pairs(data, design, wl_rates):
     key_data = []
     key_cols = ['respid', 'Choice Set', 'Item A', 'Item B']
     middle_data = []
-    middle_cols = ['respid', 'Version', 'Task', 'Middle A', 'Middle B']
+    middle_cols = ['respid', 'Version', 'Task']
+    middle_middle_cols = ['Middle A', 'Middle B', 'Middle C']
 
     for i in data.index: # for each respondent
         rank_data = data.loc[i][rank_cols]
@@ -77,7 +78,7 @@ def pairs(data, design, wl_rates):
         # create pairs from ranks (differential)
         best_pairs = []
         worst_pairs = []
-        
+
         # keep track of items
         best_labels = []
         worst_labels = []
@@ -112,8 +113,8 @@ def pairs(data, design, wl_rates):
 
             middles = [item for item in items if item not in [best, worst]] # a list of all items in the design that aren't best or worst
             middle_data += [ [respid, version, task] + middles ]
-#             md_pairs_BvM.append([best, worst])
-#             BvM_labels.append([f'B{task}', f'W{task}'])
+    #             md_pairs_BvM.append([best, worst])
+    #             BvM_labels.append([f'B{task}', f'W{task}'])
             for m, middle in enumerate(middles):
                 md_pairs_BvM.append([best, middle])
                 md_pairs_MvW.append([middle, worst])
@@ -122,7 +123,7 @@ def pairs(data, design, wl_rates):
 
         all_pairs = best_pairs + md_pairs_BvM + md_pairs_MvW + worst_pairs
         all_labels = best_labels + BvM_labels + MvW_labels + worst_labels
-        
+
         key_data += [ [i, l+1, all_labels[l][0], all_labels[l][1]] for l in range(0, len(all_labels)) ]
 
         for s, pair in enumerate(all_pairs):
@@ -132,7 +133,9 @@ def pairs(data, design, wl_rates):
     streamlined_df = pd.DataFrame(streamlined_data, columns = streamlined_cols)
     key_df = pd.DataFrame(key_data, index=range(1, len(key_data)+1), columns=key_cols)
     key_df.set_index('respid', inplace=True)
+
+    middle_cols += middle_middle_cols[:len(middle_data[0]) - 3]
     middle_df = pd.DataFrame(middle_data, columns=middle_cols)
     middle_df.set_index('respid', inplace=True)
-                                   
+
     return streamlined_df, key_df, middle_df
