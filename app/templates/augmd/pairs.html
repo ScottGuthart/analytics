@@ -20,10 +20,12 @@
         <p>Responseid: <code>responseid</code></p>
         <p>Respid: <code>respid</code></p>
         <p>MaxDiff Version: <code>&#39;hVersion&#39;</code></p>
+        <p><strong>Notes: </strong>The script expects both a respid and response id column. For the MDBEST and MDWORST columns, you don't necessarily need to include the task number after *MDWORST -- the script assumes that they appear in the data in the same order as the design. So that the best and worst items for the first task appear before the best and worst items for the second task.</p>
         <h3 id="ranking-file">Ranking File</h3>
         <p>Best ranks: <code>*RANKBEST_[item#]</code></p>
         <p>Worst ranks: <code>*RANKWORST_[item#]</code></p>
-        <p>Respid: <code>respid</code></p>
+        <p>Worst ranks: <code>*RANKWORST_[item#]</code></p>
+        <p><strong>Notes: </strong><code>*RANKBEST_1*</code> will correspondent to the ranking of item 1 not the item a respondent ranked as 1. This should be the same format you receive the data in so you don't need to do any additional setup here.</p>
         <h3 id="win-loss-rates-file">Win Loss Rates File</h3>
         <p>All you need for this file is a column with the header <code>Wins</code> where the first row is the number of times you&#39;d like the best of the best item to win and the last row with the number of times you&#39;d like the worst of the best items to win.</p>
         <p><strong>Note:</strong> When generating pairs for the worst items, the script reverses the order </p>
