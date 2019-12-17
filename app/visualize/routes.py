@@ -10,8 +10,8 @@ import pygsheets
 @login_required
 @check_confirmed
 def distribution():
-    client = pygsheets.authorize(service_account_env_var='GDRIVE_API_CREDENTIALS')
-    
+    #client = pygsheets.authorize(service_account_env_var='GDRIVE_API_CREDENTIALS')
+
     y_col = "tip"
     color_col = "sex"
     x_col = "smoker"
