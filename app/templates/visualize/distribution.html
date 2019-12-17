@@ -10,13 +10,64 @@
         var graphs = {{plot | safe}};
         Plotly.plot('bargraph',graphs,{});
     </script>
+
+    <script>
+    $('.form-control').on('change',function(){
+
+        $.ajax({
+            url: "{{ url_for('visualize.update_plot') }}",
+            type: "GET",
+            contentType: 'application/json;charset=UTF-8',
+            data: {
+                'y_col': document.getElementById('y_col').value,
+                'x_col': document.getElementById('x_col').value,
+                'color_col': document.getElementById('color_col').value,
+
+            },
+            dataType:"json",
+            success: function (data) {
+                Plotly.newPlot('bargraph', data);
+            }
+        });
+        })
+
+    </script>
 {% endblock %}
 
 {% block app_content %}
+    <div class="alert alert-info alert-dismissible" role="alert">
+        <b>Note: </b>This is a prototype. You cannot use your own data yet.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
     <h1>Visualize Distribution</h1>
     <div class="container">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-2">
+                        <br>
+                        <label> Column to Visualize</label>
+                        <select class="form-control" id ='y_col'>
+                            {% for col in cols %}
+                            <option value="{{col}}"{% if col == y_col %} selected {% endif %}>{{col}}</option>
+                            {% endfor %}
+                        </select><br>
+                        <label> Subgroup 1 (Colors)</label>
+                        <select class="form-control" id ='color_col'>
+                            {% for col in cols %}
+                            <option value="{{col}}"{% if col == color_col %} selected {% endif %}>{{col}}</option>
+                            {% endfor %}
+                            <option value="NONE"{% if color_col == "NONE" %} selected {% endif %}>NONE</option>
+                        </select><br>
+                        <label> Subgroup 2 (X axis)</label>
+                        <select class="form-control" id ='x_col'>
+                            {% for col in cols %}
+                            <option value="{{col}}"{% if col == x_col %} selected {% endif %}>{{col}}</option>
+                            {% endfor %}
+                            <option value="NONE"{% if x_col == "NONE" %} selected {% endif %}>NONE</option>
+                        </select>
+                </div>
+                <div class="col-md-7">
                     <div class="chart" id="bargraph">
 
                     </div>

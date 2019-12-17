@@ -18,3 +18,5 @@ instance/
 
 app.db
 flaskapp.log*
+
+client_secret.json

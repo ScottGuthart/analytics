@@ -4,30 +4,16 @@ import json
 import plotly.graph_objs as go
 import plotly.express as px
 
-def create_plot():
-
-    N = 40
-    x = np.linspace(0, 1, N)
-    y = np.random.randn(N)
-    df = pd.DataFrame({'x': x, 'y': y}) # creating a sample dataframe
-
-    ##bar chart
-    # data = [
-    #     go.Bar(
-    #         x=df['x'], # assign x as the dataframe column 'x'
-    #         y=df['y']
-    #     )
-    # ]
-
-    ## single violin
-    # tips = px.data.tips()
-    # data = px.violin(tips, y="total_bill", box=True, # draw box plot inside the violin
-    #             points='all', # can be 'outliers', or False
-    #            )
+def create_plot(df, x, y, color):
 
     # multiple violins
-    tips = px.data.tips()
-    data = px.violin(tips, y="tip", x="smoker", color="sex", box=True, points="all",
+    tips = df
+    if x == "NONE":
+          x = None
+    if color == "NONE":
+          color = None
+
+    data = px.violin(tips, y=y, x=x, color=color, box=True, points="all",
           hover_data=tips.columns)
 
     graphJSON = json.dumps(data, cls=plotly.utils.PlotlyJSONEncoder)
