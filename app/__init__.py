@@ -45,6 +45,9 @@ def create_app(config_class=Config):
     from app.visualize import bp as visualize_bp
     app.register_blueprint(visualize_bp, url_prefix='/viz')
 
+    from app.optimize import bp as optimize_bp
+    app.register_blueprint(optimize_bp, url_prefix='/optimize')
+
     if not app.debug and not app.testing:
         if app.config['MAIL_SERVER']:
             auth = None
